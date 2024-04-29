@@ -26,7 +26,34 @@ pipeline {
     }
     
     stages {
+        stage("OS Setup") {
+          matrix {
+            axes {
+              axis {
+                name "OS"
+                values "linux", "windows", "mac"
+              }
+              axis {
+                name "ARCH"
+                values "32", "64"
+              }
+            }
+          }
+          stages {
+            stage("OS Setup") {
+              agent {
+                node {
+                  label "linux && java11"
+                }
+              }
+              steps {
+                echo("Setup ${OS} ${ARCH}")
+              }
+            }
+          }
+        }
         stage("Preparation") {
+          failFast true
           parallel {
             stage("Prepare Java") {
               agent {
@@ -47,7 +74,7 @@ pipeline {
                   label "linux && java11"
                 }
               }
-              
+
               steps {
                 echo("Prepare Maven")
                 sleep(5)
