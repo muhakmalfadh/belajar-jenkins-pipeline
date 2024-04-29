@@ -209,13 +209,14 @@ pipeline {
             }
           }
           steps {
-            withcredentials([usernamePassword(
-              credentialsId: "akmal_rahasia",
-              usernameVariable: "USER",
-              passwordVariable: "PASSWORD"
-            )]) {
-              sh('echo "Release it with -u $USER -p $PASSWORD" > "release2.txt"')
-            }
+            echo "Hello from release"
+            // withcredentials([usernamePassword(
+            //   credentialsId: "akmal_rahasia",
+            //   usernameVariable: "USER",
+            //   passwordVariable: "PASSWORD"
+            // )]) {
+            //   sh('echo "Release it with -u $USER -p $PASSWORD" > "release2.txt"')
+            // }
           }
         }
     }
