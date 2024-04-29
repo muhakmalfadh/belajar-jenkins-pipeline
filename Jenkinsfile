@@ -26,17 +26,16 @@ pipeline {
     }
     
     stages {
-        stage("OS Setup") {
-          matrix {
-            axes {
-              axis {
-                name "OS"
-                values "linux", "windows", "mac"
-              }
-              axis {
-                name "ARCH"
-                values "32", "64"
-              }
+      stage("OS Setup") {
+        matrix {
+          axes {
+            axis {
+              name "OS"
+              values "linux", "windows", "mac"
+            }
+            axis {
+              name "ARCH"
+              values "32", "64"
             }
           }
           stages {
@@ -52,7 +51,8 @@ pipeline {
             }
           }
         }
-        stage("Preparation") {
+      }
+      stage("Preparation") {
           failFast true
           parallel {
             stage("Prepare Java") {
